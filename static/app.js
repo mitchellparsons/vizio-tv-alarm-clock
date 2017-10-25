@@ -58,3 +58,7 @@ $("#pair-tv").click(function() {
     }
   });
 })
+
+$("#stop").click(function() {
+  $.get("/stop")
+})

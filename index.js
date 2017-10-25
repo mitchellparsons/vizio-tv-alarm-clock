@@ -79,6 +79,11 @@ app.post("/pair", function(req, res) {
   })
 })
 
+app.get("/stop", function(req, res) {
+  data.state = "sleep"
+  res.send("ok")
+})
+
 app.listen(3000, function () {
   console.log("Vizio TV Alarm Clock listening on port 3000!")
 })
