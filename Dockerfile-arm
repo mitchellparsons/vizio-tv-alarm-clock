@@ -1,0 +1,4 @@
+FROM arm32v7/node:8-slim
+COPY . .
+ENTRYPOINT [ "node", "index.js" ]
+EXPOSE 3000
