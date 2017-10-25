@@ -1,8 +1,0 @@
-{
-    "alarm": "18:45:00",
-    "timezone": "-5",
-    "leadTimeSeconds": "1800",
-    "durationSeconds": "300",
-    "sound": "alarm1.mp3",
-    "state": "sleep"
-}

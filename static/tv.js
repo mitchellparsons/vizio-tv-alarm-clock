@@ -2,6 +2,7 @@ var SUNRISE_HEX = "#FD7D01";
 var SUN_HEX = "#FDB813";
 var state = "nothing";
 var alarmSound;
+var timezone = "America/Chicago";
 
 
 
@@ -12,7 +13,7 @@ function startPreAlarm(alarmTime) {
   var now = (new Date()).getTime();
   console.log("starting pre alarm color changing");
   $("body").css("background-color", SUNRISE_HEX)
-  $("body").animate({'background-color': SUN_HEX}, ((new Date(alarmTime)).getTime() - now), 'linear', function(){
+  $("body").animate({'background-color': SUN_HEX}, (alarmTime - now), 'linear', function(){
     console.log("Done prealarming colors");
   });
 }
@@ -35,6 +36,7 @@ function stopAlarm() {
 function getAlarmData() {
   $.get( "/alarm", function( data ) {
     console.log( "Load was performed.", data );
+    timezone = data.timezone
     if(data.state !== state) {
       state = data.state;
       switch (state) {
@@ -60,10 +62,10 @@ getAlarmData();
 
 // DISPLAY TIME
 function startTime() {
-  var today = new Date();
-  var h = today.getHours() % 12;
-  var m = today.getMinutes();
-  var s = today.getSeconds();
+  var today = moment.tz(timezone);
+  var h = today.hours() % 12;
+  var m = today.minutes();
+  var s = today.seconds();
   m = m < 10 ? "0" + m : m;
   s = s < 10 ? "0" + s : s;
   document.getElementById('time').innerHTML = h + ":" + m + ":" + s;

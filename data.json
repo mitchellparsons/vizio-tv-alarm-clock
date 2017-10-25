@@ -1,0 +1,11 @@
+{
+    "alarm": "09:49:20",
+    "timezone": "America/Chicago",
+    "leadTimeSeconds": "1800",
+    "durationSeconds": "300",
+    "sound": "alarm1.mp3",
+    "state": "sleep",
+    "vizioTVIP": "192.168.1.75",
+    "vizioAuthToken": "Z0xfbukxht",
+    "hdmi": "2"
+}

@@ -22,16 +22,29 @@ function updateAlarm(time) {
       timezone: $("#timezone").val()
     })
   })
-    .done(function( msg ) {
-      alert( "Data Saved: " + msg );
-    });
 }
 
 // tv
 var tvip = $("#tvip").on("change", function() {
   var a = $(this).val();
   console.log("changed ip to: ", a);
+  updateTVIP(a);
 })
+
+function updateTVIP(tvip) {
+  $.ajax({
+    method: "POST",
+    url: "/tv",
+    dataType: "json",
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify({
+      tvip: tvip
+    })
+  })
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });
+}
 
 $.get("/tv", function(data) {
   tvip.val(data.tvip);
@@ -41,3 +54,20 @@ $.get("/tv", function(data) {
     // do something else
   }
 });
+
+$("#pair-tv").click(function() {
+  $.get("/pair", function( data ) {
+    if(data === "ok"){
+      pin = prompt("Enter the PIN:");
+      $.ajax({
+        method: "POST",
+        url: "/pair",
+        dataType: "json",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({
+          pin: pin
+        })
+      })
+    }
+  });
+})
