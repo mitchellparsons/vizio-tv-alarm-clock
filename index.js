@@ -22,7 +22,8 @@ app.get("/alarm", function(req, res) {
   let now = moment.tz(data.timezone)
   let alarm = moment(now.format("YYYY-MM-DDT") + data.alarm + now.format("Z"))
   res.send({
-    alarm: alarm.valueOf(),
+    alarm: data.alarm,
+    time: alarm.valueOf(),
     state: data.state,
     sound: data.sound,
     timezone: data.timezone

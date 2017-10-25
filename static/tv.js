@@ -46,7 +46,7 @@ function getAlarmData() {
           break;
         case "preAlarm":
           console.log("State to preAlarm");
-          startPreAlarm(data.alarm);
+          startPreAlarm(data.time);
           break;
         case "alarm":
           console.log("State to alarm");
