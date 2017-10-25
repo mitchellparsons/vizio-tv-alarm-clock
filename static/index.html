@@ -1,0 +1,54 @@
+<html>
+<head>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/node_modules/timepicker/jquery.timepicker.min.css">
+  <script src="/node_modules/timepicker/jquery.timepicker.js"></script>
+  <style>
+    html {
+      text-align: center;
+      margin-top: 10%
+    }
+    body {
+      background-color: #fff;
+    }
+    .stop-alarm{
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 5em;
+      background-color: green;
+      color: #fff;
+    }
+    div {
+      padding-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <button class="stop-alarm">Stop Alarm</button>
+  </div>
+  <div class="set-alarm">
+    Set Alarm:
+    <input type="text" class="timepicker" id="timepicker">
+  </div>
+  <div class="set-alarm">
+    Set Timezone:
+    <select id="timezone">
+      <option>-3</option>
+      <option>-4</option>
+      <option selected>-5</option>
+      <option>-6</option>
+      <option>-7</option>
+    </select>
+  </div>
+  <div>
+    Set TV IP:
+    <input type="text" id="tvip">
+  </div>
+  <div>
+    <button id="pair-tv">Pair TV</button>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>

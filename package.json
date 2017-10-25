@@ -1,0 +1,20 @@
+{
+  "name": "vizio-tv-alarm-clock",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mitchellparsons/vizio-tv-alarm-clock.git",
+  "author": "Mitchell Parsons <mitchell.parsons@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "jquery-ui-dist": "^1.12.1",
+    "nodemon": "^1.12.1",
+    "timepicker": "^1.11.12",
+    "vizio-smart-cast": "^1.1.5"
+  }
+}
