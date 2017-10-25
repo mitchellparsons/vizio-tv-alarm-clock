@@ -16,7 +16,6 @@
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.13",
     "nodemon": "^1.12.1",
-    "timepicker": "^1.11.12",
     "vizio-smart-cast": "^1.1.5"
   }
 }

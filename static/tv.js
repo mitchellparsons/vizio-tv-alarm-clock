@@ -4,14 +4,10 @@ var state = "nothing";
 var alarmSound;
 var timezone = "America/Chicago";
 
-
-
-// var fakeMidnight = now + (30 * 1000);
-// var untilMidnight = (fakeMidnight - now);
-
 function startPreAlarm(alarmTime) {
   var now = (new Date()).getTime();
   console.log("starting pre alarm color changing");
+  $("body").stop();
   $("body").css("background-color", SUNRISE_HEX)
   $("body").animate({'background-color': SUN_HEX}, (alarmTime - now), 'linear', function(){
     console.log("Done prealarming colors");

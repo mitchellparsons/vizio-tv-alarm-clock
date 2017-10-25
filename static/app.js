@@ -1,59 +1,46 @@
-var alarm = $("#timepicker").timepicker({ timeFormat: "H:i:s", step: 15 });
+var alarmHour = $("#alarm-hour");
+var alarmMinute = $("#alarm-minute");
+var alarmSecond = $("#alarm-second");
+var tvip = $("#tvip");
+var timezone = $("#timezone");
 
-alarm.on("change", function() {
-  var a = $(this).val();
-  console.log("changed time to: ", a);
-  updateAlarm(a);
-});
-
-$.get("/alarm", function( data ) {
-  var now = new Date();
-  alarm.val(data.alarm);
-});
-
-function updateAlarm(time) {
-  $.ajax({
-    method: "POST",
-    url: "/alarm",
-    dataType: "json",
-    contentType: 'application/json; charset=utf-8',
-    data: JSON.stringify({
-      alarm: time,
-      timezone: $("#timezone").val()
-    })
-  })
+function setAlarm(alarm) {
+  alarmHour.val(alarm.substring(0,2));
+  alarmMinute.val(alarm.substring(3,5));
+  alarmSecond.val(alarm.substring(6,8));
 }
 
-// tv
-var tvip = $("#tvip").on("change", function() {
-  var a = $(this).val();
-  console.log("changed ip to: ", a);
-  updateTVIP(a);
-})
+function getAlarm() {
+  // return alarmHour.val() + ":" + alarmMinute.val() + ":" + alarmSecond.val();
+  return ((alarmHour.val().length < 2) ? "0" + alarmHour.val() : alarmHour.val())
+  + ":"
+  + ((alarmMinute.val().length < 2) ? "0" + alarmMinute.val() : alarmMinute.val())
+  + ":"
+  + ((alarmSecond.val().length < 2) ? "0" + alarmSecond.val() : alarmSecond.val());
+}
 
-function updateTVIP(tvip) {
+$.get("/data", function(data) {
+  setAlarm(data.alarm);
+  tvip.val(data.tvip);
+  timezone.val(data.timezone);
+});
+
+$("#update").click(function() {
   $.ajax({
     method: "POST",
-    url: "/tv",
+    url: "/update",
     dataType: "json",
     contentType: 'application/json; charset=utf-8',
     data: JSON.stringify({
-      tvip: tvip
+      tvip: $("#tvip").val(),
+      alarm: getAlarm(),
+      timezone: $("#timezone").val()
     })
   })
   .done(function( msg ) {
     alert( "Data Saved: " + msg );
   });
-}
-
-$.get("/tv", function(data) {
-  tvip.val(data.tvip);
-  if(data.isPaired) {
-    // do something
-  } else {
-    // do something else
-  }
-});
+})
 
 $("#pair-tv").click(function() {
   $.get("/pair", function( data ) {

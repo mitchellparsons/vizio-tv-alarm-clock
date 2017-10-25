@@ -8,7 +8,6 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
 let data = require("./data.json")
 data.state = "sleep"
 
@@ -17,6 +16,19 @@ let tv = (data.vizioAuthToken) ? new smartcast(data.vizioTVIP, data.vizioAuthTok
 app.use("/", express.static("static"))
 app.use("/node_modules", express.static("node_modules"))
 app.use("/sounds", express.static("sounds"))
+
+app.get("/data", function(req, res) {
+  let now = moment.tz(data.timezone)
+  let alarm = moment(now.format("YYYY-MM-DDT") + data.alarm + now.format("Z"))
+  res.send({
+    alarm: data.alarm,
+    time: alarm.valueOf(),
+    state: data.state,
+    sound: data.sound,
+    timezone: data.timezone,
+    tvip: data.vizioTVIP
+  })
+})
 
 app.get("/alarm", function(req, res) {
   let now = moment.tz(data.timezone)
@@ -30,28 +42,11 @@ app.get("/alarm", function(req, res) {
   })
 })
 
-app.post("/alarm", function(req, res) {
+app.post("/update", function(req, res) {
+  data.vizioTVIP = req.body.tvip;
   data.alarm = req.body.alarm
   data.timezone = req.body.timezone
   saveData(data, function(err){
-    if(err) {
-      res.send("error")
-    } else {
-      res.send("ok")
-    }
-  })
-})
-
-app.get("/tv", function(req, res) {
-  res.send({
-    tvip: data.vizioTVIP,
-    isPaired: !!tv
-  })
-})
-
-app.post("/tv", function(req, res) {
-  data.vizioTVIP = req.body.tvip;
-  saveData(data,function(err){
     if(err) {
       res.send("error")
     } else {

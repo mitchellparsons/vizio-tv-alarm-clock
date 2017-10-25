@@ -1,10 +1,10 @@
 {
-    "alarm": "07:00:00",
+    "alarm": "10:30:07",
     "timezone": "America/Chicago",
     "leadTimeSeconds": "1800",
     "durationSeconds": "300",
     "sound": "alarm1.mp3",
-    "state": "sleep",
+    "state": "preAlarm",
     "vizioTVIP": "192.168.1.75",
     "vizioAuthToken": "Z0xfbukxht",
     "hdmi": "2"
